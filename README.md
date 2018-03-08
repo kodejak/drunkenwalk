@@ -1,9 +1,9 @@
 # Bob&acute;s drunken walk
-A funny and simple random walk implementation with JavaScript.
+A simple and funny random walk implementation with JavaScript.
 
 ### Story
 Bob is at vacation in Barcelona. He drunk to much "Happy Otter" pale ale and
-wants to get back to the Hotel. It is 1:15 AM and the Battery of his phone is
+wants to get back to the Hotel. It is 1:15 AM and the battery of his phone is
 empty. He is straying around to find the right way.
 We hope he will find his way as soon as possible.
 
