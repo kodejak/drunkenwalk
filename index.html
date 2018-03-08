@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="shortcut icon" type="image/x-icon" href="img/cap.png">
+  <title>Bob&acute;s drunken walk</title>
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/drunkenwalk.js"></script>
+  </head>
+  <body>
+    <nav id="navigation" class="menu-opener">
+      <div class="menu-opener-inner"></div>
+    </nav>
+    <nav class="menu">
+      <div class="content">
+        <div id="events">
+          <div id="eventtext"><textarea id="textarea" rows="8" cols="40" readonly></textarea></div>
+          <div id="eventcontrols"><button type="button" id="buttonRestart" class="btn" onclick="drawer.restartWalk();">Start again</button></div>
+          <div class="clear"/>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <script src="js/jquery-1.9.1.js"></script>
+    <div id="page">
+      <canvas id="canvasLayer0" width="1680" height="885">
+      </canvas>
+      <canvas id="canvasLayer1" width="1680" height="885">
+      </canvas>
+      <canvas id="canvasLayer2" width="1680" height="885">
+      </canvas>
+      <canvas id="canvasLayer3" width="1680" height="885">
+      </canvas>
+
+      <div id="overlay">
+        <img id="bob" src="img/cap.png">
+        <p id="text">This is Bob.<br><br>Bob is at vacation in
+Barcelona. He is drunk and wants to get back to the hotel.
+Watch Bob on his way back to the hotel.</p>
+        <button type="button" id="buttonStart" class="btn" onclick="drawer.startWalk();">Start</button>
+      </div>
+    </div>
+    <script>
+      // On mobile Safari in portrait mode is a bottom menu bar which results in wrong window.innherHeight
+      var iOS;
+      var iw, ih;
+      function getWindowSize() {
+        iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream && Math.abs(window.orientation) !== 90;
+        iw = (iOS) ? screen.width : window.innerWidth, ih = (iOS) ? screen.height : window.innerHeight;
+      }
+
+      $(document).ready(function() {
+        getWindowSize();
+        drawer = new WalkDrawer(ih, iw);
+      });
+
+      $(window).on('resize', function(){
+        if (drawer != null && drawer !== 'undefined') {
+          drawer.stop();
+        }
+        getWindowSize();
+        drawer = new WalkDrawer(ih, iw);
+      });
+
+      $(".menu-opener").click(function(){
+        $(".menu-opener, .menu-opener-inner, .menu, .content").toggleClass("active");
+        if ($(".content").hasClass("show") == false) {
+          setTimeout(function () {
+            $(".content").addClass("show");
+            drawer.scrollMessages();
+          }, 300);
+        } else {
+            $(".content").removeClass("show");
+        }
+      });
+    </script>
+</body></html>
